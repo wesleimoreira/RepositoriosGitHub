@@ -1,0 +1,94 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="height:609px">
+    <div class="container-fluid px-0 h-100">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="/"><i class="fa fa-github-alt" aria-hidden="true"></i></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link" href="/">Meus Repositórios</a>
+                            <a class="nav-link" href="/Home/GetRepositorie">Veja Outros Repositórios</a>
+                            <a class="nav-link" href="/Home/Favorite">Favoritos</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="row">
+            <input type="hidden" id="success" value="@TempData["success"]" />
+            <input type="hidden" id="info" value="@TempData["info"]" />
+            <input type="hidden" id="warning" value="@TempData["warning"]" />
+            <input type="hidden" id="error" value="@TempData["error"]" />
+        </div>
+
+        <main class="container" style="height:calc(100% - 80px)">
+            @RenderBody()
+        </main>
+
+        <footer>
+            <div class="container">
+                <p class="text-uppercase">&copy; @DateTime.Now.Year - Api GitHub</p>
+            </div>          
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script>
+    $(function () {
+        var displayMessage = function (message, msgType) {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr[msgType](message);
+        };
+
+        if ($('#success').val()) {
+
+            displayMessage($('#success').val(), 'success');
+        }
+
+        if ($('#info').val()) {
+            displayMessage($('#info').val(), 'info');
+        }
+
+        if ($('#warning').val()) {
+            displayMessage($('#warning').val(), 'warning');
+        }
+
+        if ($('#error').val()) {
+            displayMessage($('#error').val(), 'error');
+        }
+    });
+</script>

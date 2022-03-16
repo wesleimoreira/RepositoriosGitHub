@@ -1,0 +1,71 @@
+﻿@model RepositorioGitHub.Dominio.RepositoryViewModel
+
+<div class="row h-100 my-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header text-uppercase">
+                @using (Html.BeginForm("GetRepositorie", "Home", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-2"> </div>
+                        <div class="col-8">
+                            <form class="form-inline pull-right">
+                                <div class="form-group d-flex">
+                                    <input type="text" id="Name" name="Name" class="form-control" style="border-radius:5px 0 0 5px;" placeholder="Nome do Repositório" />
+                                    <button type="submit" class="btn btn-primary" style="border-radius:0 5px 5px 0;">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-2"> </div>
+                    </div>
+                }
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-borderless table-hover">
+                        <caption>
+                            <img src="https://e3ba6e8732e83984.cdn.gocache.net/uploads/image/file/1356860/regular_785896d95be9eef88132b387390ed8ce.png" class="img-rounded" alt="@ViewBag.Title" width="50" />
+                        </caption>
+                        <thead class="table-dark text-uppercase">
+                            <tr>
+                                <th></th>                               
+                                <th>Proprietario</th>
+                                <th>Nome Completo</th>
+                                <th>URL</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model.Repositories)
+                                {
+                                    <tr>
+                                        <td> <img src="@item.Owner.AvatarUrl" class="img-rounded" alt="@item.FullName" width="36" />  </td>                                        
+                                        <td> @Html.DisplayFor(modelItem => item.Owner.Login) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.FullName) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Url) </td>
+                                        <td>
+                                            @using (Html.BeginForm("DetailsRepository", "Home", FormMethod.Get))
+                                            {
+                                                <form>
+                                                    <input type="hidden" name="id" id="id" value="@item.Id" />
+                                                    <input type="hidden" name="login" id="login" value="@item.Owner.Login" />
+                                                    <button type="submit" class="btn btn-warning bg-warning">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

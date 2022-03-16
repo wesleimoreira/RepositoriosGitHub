@@ -1,0 +1,43 @@
+﻿@model List<RepositorioGitHub.Dominio.FavoriteViewModel>
+
+
+<div class="row h-100">
+    <div class="col-md-12 justify-content-center d-flex align-items-center">
+        <div class="card">
+            <h5 class="card-header text-uppercase"> Favoritos </h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-borderless table-hover">
+                        <caption>
+                            <img src="https://e3ba6e8732e83984.cdn.gocache.net/uploads/image/file/1356860/regular_785896d95be9eef88132b387390ed8ce.png" class="img-rounded" alt="@ViewBag.Title" width="50" />
+                        </caption>
+                        <thead class="table-dark text-uppercase">
+                            <tr>
+                                <th>  Proprietário  </th>
+                                <th>  Description </th>
+                                <th>  Language </th>
+                                <th>  Url </th>
+                                <th>  UpdateLast </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td> @Html.DisplayFor(modelItem => item.Login)  </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Description)  </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Language)   </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Url)  </td>
+                                        <td> @Html.DisplayFor(modelItem => item.UpdateLast)  </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

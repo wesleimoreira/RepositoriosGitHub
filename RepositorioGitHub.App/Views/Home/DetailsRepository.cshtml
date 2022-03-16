@@ -1,0 +1,67 @@
+﻿@model RepositorioGitHub.Dominio.GitHubRepositoryViewModel
+
+
+<div class="row h-100">
+    <div class="col-md-12 justify-content-center d-flex align-items-center">
+        <div class="card">
+            <h5 class="card-header"> <b class="text-uppercase">  Mais Detalhes: </b> @Model.Url </h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-borderless table-hover">
+                        <caption>
+                            <img src="https://e3ba6e8732e83984.cdn.gocache.net/uploads/image/file/1356860/regular_785896d95be9eef88132b387390ed8ce.png" class="img-rounded" alt="@ViewBag.Title" width="50" />
+                        </caption>
+                        <thead class="table-dark text-uppercase">
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Linguagem</th>
+                                <th>Ultima Atualização</th>
+                                <th>Proprietário</th>                                
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                <tr>
+                                    <td> <img src="@Model.Owner.AvatarUrl" class="img-rounded" alt="@Model.FullName" width="36" />  </td>
+                                    <td> @Model.Name  </td>
+                                    <td> @Model.Description  </td>
+                                    <td> @Model.Language </td>
+                                    <td> @Model.UpdatedAt </td>
+                                    <td> @Model.Owner.Login  </td>                                   
+                                    <td>
+                                        @using (Html.BeginForm("FavoriteSave", "Home", FormMethod.Post))
+                                        {
+                                            <form class="form-inline pull-right">
+                                                @Html.HiddenFor(s => s.Id)
+                                                @Html.HiddenFor(s => s.Url)
+                                                @Html.HiddenFor(s => s.Name)
+                                                @Html.HiddenFor(s => s.Owner.Login)
+                                                @Html.HiddenFor(s => s.Language)
+                                                @Html.HiddenFor(s => s.UpdatedAt)
+                                                @Html.HiddenFor(s => s.Description)
+                                                <button class="btn btn-danger">
+                                                    <i class="fa fa-heart" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <a href="/Home/GetRepositorie" class="btn btn-secondary"> Voltar </a>                                   
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
